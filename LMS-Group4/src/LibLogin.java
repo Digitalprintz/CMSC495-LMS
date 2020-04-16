@@ -1,3 +1,13 @@
+/**
+   [Login Page for the Librarian.]
+   
+   [Notes]
+   
+   @author <A HREF="mailto:[christophera1997@yahoo.com]">[Christopher Hammond]</A>
+   @version $Revision: .2 $ $Date: 2020/16/04 07:51:25 $
+
+**/
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;

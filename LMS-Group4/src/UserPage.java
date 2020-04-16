@@ -1,3 +1,13 @@
+/**
+   [User search page. Used to find books in the library's database.]
+   
+   [Notes]
+   
+   @author <A HREF="mailto:[christophera1997@yahoo.com]">[Christopher Hammond]</A>
+   @version $Revision: .2 $ $Date: 2020/16/04 07:51:25 $
+
+**/
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;

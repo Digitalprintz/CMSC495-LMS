@@ -1,3 +1,13 @@
+/**
+   [Main login page. Login for the user, link to create an account, link to librarian login.]
+   
+   [Notes]
+   
+   @author <A HREF="mailto:[christophera1997@yahoo.com]">[Christopher Hammond]</A>
+   @version $Revision: .2 $ $Date: 2020/16/04 07:51:25 $
+
+**/
+
 import java.awt.EventQueue;
 import java.sql.*;
 import javax.swing.*;

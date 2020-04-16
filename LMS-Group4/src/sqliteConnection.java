@@ -1,7 +1,12 @@
-/*
- * UMGC CMSC 495 Library Management System
- * Group 4
- */
+/**
+   [Creates connection to SQLite for database use.]
+   
+   [Notes]
+   
+   @author <A HREF="mailto:[christophera1997@yahoo.com]">[Christopher Hammond]</A>
+   @version $Revision: .2 $ $Date: 2020/16/04 07:51:25 $
+
+**/
 
 import java.sql.*;
 import javax.swing.*;
