@@ -113,6 +113,7 @@ public class Login {
 					else
 					{
 						JOptionPane.showMessageDialog(null, "Username or Password is incorrect, please try again.");
+						Logging.Log("2", "FAILED_LOGIN", "Login failed with username: " + userText.getText());
 					}
 					
 					rs.close();
