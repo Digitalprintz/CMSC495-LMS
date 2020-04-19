@@ -209,6 +209,8 @@ public class Register extends JFrame {
 					
 					stmt.close();
 					
+					Logging.Log("3", "ACCOUNT_CREATED", "Account created with Library ID: " + libCardText.getText());
+					
 					Login user = new Login();
 					user.frame.setVisible(true);
 					dispose();

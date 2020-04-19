@@ -109,6 +109,7 @@ public class Login {
 						user.passCard(userText.getText());
 						frame.setVisible(false);
 						user.setVisible(true);
+						Logging.Log("1", "SUCCESSFUL_LOGIN", "Login successful with username: " + userText.getText());
 					}
 					else
 					{
