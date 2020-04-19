@@ -3,7 +3,7 @@
    
    [Notes]
    
-   @author <A HREF="mailto:[christophera1997@yahoo.com]">[Christopher Hammond]</A>
+   @author [Richard Arnold, Redi Delulo, Krista Burdick, Chris Hammond, Alyssa Knight and Matt Worman]
    @version $Revision: .2 $ $Date: 2020/16/04 07:51:25 $
 
 **/
