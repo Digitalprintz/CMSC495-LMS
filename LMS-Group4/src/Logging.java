@@ -1,3 +1,13 @@
+/**
+   [Logging functions to track all actions.]
+   
+   [Notes]
+   
+   @author [Richard Arnold, Redi Delulo, Krista Burdick, Chris Hammond, Alyssa Knight and Matt Worman]
+   @version $Revision: .2 $ $Date: 2020/16/04 07:51:25 $
+
+**/
+
 import java.sql.*;
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime; 
