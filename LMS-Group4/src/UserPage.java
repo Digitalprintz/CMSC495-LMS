@@ -96,6 +96,7 @@ public class UserPage extends JFrame
 			{
 				Login user = new Login();
 				user.frame.setVisible(true);
+				Logging.Log("4", "SUCCESSFUL_LOGOUT", "Logged out successfully with username: " + libraryCard);
 				dispose();
 			}
 		});
