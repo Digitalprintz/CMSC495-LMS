@@ -65,7 +65,7 @@ public class Login {
 		lblNewLabel.setBounds(10, 11, 314, 40);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JLabel userLabel = new JLabel("Username:");
+		JLabel userLabel = new JLabel("Library Card:");
 		userLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		userLabel.setBounds(48, 108, 109, 40);
 		frame.getContentPane().add(userLabel);

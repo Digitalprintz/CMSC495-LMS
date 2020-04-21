@@ -192,33 +192,46 @@ public class Register extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				try 
+				//checks to make sure all text fields are not null and are greater then 2 in length.
+				if((firstNameText.getText() != null && firstNameText.getText().length() > 2) && 
+						(lastNameText.getText() != null && lastNameText.getText().length() > 2) && 
+						(passText.getText() != null && passText.getText().length() > 2) &&
+						(emailText.getText() != null && emailText.getText().length() > 2) && 
+						(addressText.getText() != null && addressText.getText().length() > 2) && 
+						(phoneText.getText() != null && phoneText.getText().length() > 2))
 				{
-					String query = "insert into Login (LibraryCard,FirstName,LastName,Password,EmailAddress,Address,PhoneNumber) values (?,?,?,?,?,?,?)";
-					PreparedStatement stmt = conn.prepareStatement(query);
-					stmt.setString(1, libCardText.getText());
-					stmt.setString(2, firstNameText.getText());
-					stmt.setString(3, lastNameText.getText());
-					stmt.setString(4, passText.getText());
-					stmt.setString(5, emailText.getText());
-					stmt.setString(6, addressText.getText());
-					stmt.setString(7, phoneText.getText());
-					
-					stmt.execute();
-					JOptionPane.showMessageDialog(null, "Registration Success.");
-					
-					stmt.close();
-					
-					Logging.Log("3", "ACCOUNT_CREATED", "Account created with Library ID: " + libCardText.getText());
-					
-					Login user = new Login();
-					user.frame.setVisible(true);
-					dispose();
+					try 
+					{
+						String query = "insert into Login (LibraryCard,FirstName,LastName,Password,EmailAddress,Address,PhoneNumber) values (?,?,?,?,?,?,?)";
+						PreparedStatement stmt = conn.prepareStatement(query);
+						stmt.setString(1, libCardText.getText());
+						stmt.setString(2, firstNameText.getText());
+						stmt.setString(3, lastNameText.getText());
+						stmt.setString(4, passText.getText());
+						stmt.setString(5, emailText.getText());
+						stmt.setString(6, addressText.getText());
+						stmt.setString(7, phoneText.getText());
+						
+						stmt.execute();
+						JOptionPane.showMessageDialog(null, "Registration Success.");
+						
+						stmt.close();
+						
+						Logging.Log("3", "ACCOUNT_CREATED", "Account created with Library ID: " + libCardText.getText());
+						
+						Login user = new Login();
+						user.frame.setVisible(true);
+						dispose();
+					}
+					catch(Exception e1)
+					{
+						JOptionPane.showMessageDialog(null, e1);
+						
+					}
 				}
-				catch(Exception e1)
+				else
 				{
-					JOptionPane.showMessageDialog(null, e1);
-					
+					JOptionPane.showMessageDialog(null, "Registration failed. All fields must be filled out.");
 				}
 			}
 		});
