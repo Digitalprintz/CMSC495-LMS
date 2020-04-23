@@ -1,10 +1,10 @@
 /**
-   [User search page. Used to find books in the library's database.]
+   [User search page. Used to find books in the library's database. Also allows user to access and modify their personal information.]
    
    [Notes]
    
    @author [Richard Arnold, Redi Delulo, Krista Burdick, Chris Hammond, Alyssa Knight and Matt Worman]
-   @version $Revision: .4 $ $Date: 2020/21/04 10:15:36 $
+   @version $Revision: .5 $ $Date: 2020/23/04 04:23:26 $
 
 **/
 
