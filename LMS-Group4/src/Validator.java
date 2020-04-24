@@ -36,14 +36,24 @@ public class Validator {
 		String validInput = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 		Pattern p = Pattern.compile(validInput);
 		
-		String domain = e.substring(e.indexOf("@"), e.length());
-		String afterDot = domain.substring(domain.indexOf("."), domain.length());
-		long count = domain.chars().filter(ch -> ch == '.').count();
+		boolean validCheck = false;
+		long count = 0;
+		String afterDot = "";
 		
+		if(e.contains("@")) {
+			String domain = e.substring(e.indexOf("@"), e.length());
+			if(domain.contains(".")) {
+				afterDot = domain.substring(domain.indexOf("."), domain.length());
+				count = domain.chars().filter(ch -> ch == '.').count();
+				validCheck = true;
+				
+			}
+		}
 		Matcher m = p.matcher(e);
+		
 		Connection conn = sqliteConnection.dbConnect();
 		try {
-			if(!m.matches() || count != 1 || afterDot.length() == 1) {
+			if(!validCheck || !m.matches() || count != 1 || afterDot.length() == 1) {
 				JOptionPane.showMessageDialog(null, "Email format must be XXX@XXX.XXX");
 				conn.close();
 				return false;
