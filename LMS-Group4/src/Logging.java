@@ -43,6 +43,11 @@ public class Logging {
 			JOptionPane.showMessageDialog(null, e1);
 			
 		}
-		
+		try {
+			conn.close();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 }

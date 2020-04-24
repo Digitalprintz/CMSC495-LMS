@@ -1,4 +1,5 @@
 import javax.swing.JOptionPane;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,10 +35,15 @@ public class Validator {
 		
 		String validInput = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 		Pattern p = Pattern.compile(validInput);
+		
+		String domain = e.substring(e.indexOf("@"), e.length());
+		String afterDot = domain.substring(domain.indexOf("."), domain.length());
+		long count = domain.chars().filter(ch -> ch == '.').count();
+		
 		Matcher m = p.matcher(e);
 		Connection conn = sqliteConnection.dbConnect();
 		try {
-			if(!m.matches()) {
+			if(!m.matches() || count != 1 || afterDot.length() == 1) {
 				JOptionPane.showMessageDialog(null, "Email format must be XXX@XXX.XXX");
 				conn.close();
 				return false;
