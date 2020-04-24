@@ -30,6 +30,7 @@ public class Validator {
 	
 	public static boolean checkEmail(String e){
 		//Checks that the Email is valid
+		e = e.replace(" ", "");
 		
 		String validInput = "^(.+)@(.+)$";
 		Pattern p = Pattern.compile(validInput);
@@ -49,9 +50,11 @@ public class Validator {
 			
 				if(result.next()) {
 					JOptionPane.showMessageDialog(null, "A user has already registered with the email: " + e);
+					doQuery.close();
 					conn.close();
 					return false;
 				} else {
+					doQuery.close();
 					conn.close();
 					return true;
 				}
