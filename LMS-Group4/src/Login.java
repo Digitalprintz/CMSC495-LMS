@@ -94,7 +94,7 @@ public class Login {
 					String query = "select * from Login where LibraryCard=? and Password=? ";
 					PreparedStatement stmt = conn.prepareStatement(query);
 					stmt.setString(1, userText.getText());
-					stmt.setString(2, passText.getText());
+					stmt.setString(2, Authenticate.encrypt(passText.getText(), userText.getText()));
 					
 					ResultSet rs = stmt.executeQuery();
 					int count=0;

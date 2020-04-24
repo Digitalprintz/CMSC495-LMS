@@ -207,7 +207,7 @@ public class Register extends JFrame {
 						stmt.setString(1, libCardText.getText());
 						stmt.setString(2, firstNameText.getText());
 						stmt.setString(3, lastNameText.getText());
-						stmt.setString(4, passText.getText());
+						stmt.setString(4, Authenticate.encrypt(passText.getText(), libCardText.getText()));
 						stmt.setString(5, emailText.getText());
 						stmt.setString(6, addressText.getText());
 						stmt.setString(7, phoneText.getText());
