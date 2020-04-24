@@ -60,8 +60,7 @@ public class Register extends JFrame {
 	 */
 	public Register() {
 		
-		//Sqlite Connection
-		conn = sqliteConnection.dbConnect();
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 650, 430);
@@ -207,6 +206,8 @@ public class Register extends JFrame {
 				{
 					try 
 					{
+						//Sqlite Connection
+						conn = sqliteConnection.dbConnect();
 						String query = "insert into Login (LibraryCard,FirstName,LastName,Password,EmailAddress,Address,PhoneNumber) values (?,?,?,?,?,?,?)";
 						PreparedStatement stmt = conn.prepareStatement(query);
 						stmt.setString(1, libCardText.getText());
@@ -217,7 +218,7 @@ public class Register extends JFrame {
 						stmt.setString(6, addressText.getText());
 						stmt.setString(7, phoneText.getText());
 						
-						stmt.execute();
+						stmt.executeUpdate();
 						JOptionPane.showMessageDialog(null, "Registration Success.");
 						
 						stmt.close();
@@ -226,6 +227,7 @@ public class Register extends JFrame {
 						
 						Login user = new Login();
 						user.frame.setVisible(true);
+						conn.close();
 						dispose();
 					}
 					catch(Exception e1)

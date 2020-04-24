@@ -32,17 +32,17 @@ public class Validator {
 		//Checks that the Email is valid
 		e = e.replace(" ", "");
 		
-		String validInput = "^(.+)@(.+)$";
+		String validInput = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 		Pattern p = Pattern.compile(validInput);
 		Matcher m = p.matcher(e);
-		Connection conn = null;
-		if(!m.matches()) {
-			JOptionPane.showMessageDialog(null, "Email format must be XXX@XXX");
-			return false;
-		} else {
-			try {
-				conn = sqliteConnection.dbConnect();
-				
+		Connection conn = sqliteConnection.dbConnect();
+		try {
+			if(!m.matches()) {
+				JOptionPane.showMessageDialog(null, "Email format must be XXX@XXX.XXX");
+				conn.close();
+				return false;
+			} else {
+			
 				String query = "SELECT * FROM Login WHERE EmailAddress like '" + e + "'";
 			
 				PreparedStatement doQuery = conn.prepareStatement(query);
@@ -50,21 +50,28 @@ public class Validator {
 			
 				if(result.next()) {
 					JOptionPane.showMessageDialog(null, "A user has already registered with the email: " + e);
-					doQuery.close();
 					conn.close();
 					return false;
 				} else {
-					doQuery.close();
 					conn.close();
 					return true;
 				}
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
+					
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
+		try {
+			conn.close();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+			
 		return false;
 	}
+
 	
 	public static boolean checkPhone(String pn) {
 		//Checks that the Password is valid
