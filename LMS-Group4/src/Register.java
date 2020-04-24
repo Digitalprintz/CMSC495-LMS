@@ -236,7 +236,7 @@ public class Register extends JFrame {
 				}
 				else
 				{
-					JOptionPane.showMessageDialog(null, "Registration failed. All fields must be filled out.");
+					JOptionPane.showMessageDialog(null, "Registration failed. All fields must be filled out correctly.");
 				}
 			}
 		});

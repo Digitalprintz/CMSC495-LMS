@@ -10,7 +10,7 @@ public class Validator {
 
 	public static boolean checkName(String fn) {
 		//Checks that the First Name is valid
-		if(!(!fn.equals("")) && (fn != null) && (fn.matches("^[a-zA-Z]*$"))) {
+		if(!(!fn.isBlank()) && (fn != null) && (fn.matches("^[a-zA-Z]*$"))) {
 			JOptionPane.showMessageDialog(null, "Names can only contain letters and cannot be blank.");
 			return false;
 		} else {
