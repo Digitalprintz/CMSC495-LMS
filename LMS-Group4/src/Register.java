@@ -192,6 +192,7 @@ public class Register extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				/**
 				//checks to make sure all text fields are not null and are greater then 2 in length.
 				if((firstNameText.getText() != null && firstNameText.getText().length() > 2) && 
 						(lastNameText.getText() != null && lastNameText.getText().length() > 2) && 
@@ -199,6 +200,10 @@ public class Register extends JFrame {
 						(emailText.getText() != null && emailText.getText().length() > 2) && 
 						(addressText.getText() != null && addressText.getText().length() > 2) && 
 						(phoneText.getText() != null && phoneText.getText().length() > 2))
+				*/
+				if(Validator.checkName(firstNameText.getText()) && Validator.checkName(lastNameText.getText())
+						&& Validator.checkPassword(passText.getText()) && Validator.checkEmail(emailText.getText())
+						&& Validator.checkPhone(phoneText.getText()))
 				{
 					try 
 					{
@@ -239,5 +244,4 @@ public class Register extends JFrame {
 		btnNewButton.setBounds(480, 300, 146, 40);
 		contentPane.add(btnNewButton);
 	}
-
 }
