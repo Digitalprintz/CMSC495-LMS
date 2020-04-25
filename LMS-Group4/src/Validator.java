@@ -92,10 +92,41 @@ public class Validator {
 	public static boolean checkPhone(String pn) {
 		//Checks that the Password is valid
 		pn = pn.replace("-", "");
+		pn = pn.replace(" ", "");
 		
 		if(!pn.isBlank() && (!pn.matches("\\d+") || pn.length() != 10)){
 			JOptionPane.showMessageDialog(null, "Please enter a 10 digit phone number, or leave blank.");
 			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	
+	public static boolean checkEmailUpdate(String e){
+		//Checks that the Email is valid
+		e = e.replace(" ", "");
+		
+		String validInput = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+		Pattern p = Pattern.compile(validInput);
+		
+		boolean validCheck = false;
+		long count = 0;
+		String afterDot = "";
+		
+		if(e.contains("@")) {
+			String domain = e.substring(e.indexOf("@"), e.length());
+			if(domain.contains(".")) {
+				afterDot = domain.substring(domain.indexOf("."), domain.length());
+				count = domain.chars().filter(ch -> ch == '.').count();
+				validCheck = true;
+				
+			}
+		}
+		Matcher m = p.matcher(e);
+		if(!validCheck || !m.matches() || count != 1 || afterDot.length() == 1) {
+			JOptionPane.showMessageDialog(null, "Email format must be XXX@XXX.XXX");
+				return false;
 		} else {
 			return true;
 		}

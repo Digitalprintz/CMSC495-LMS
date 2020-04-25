@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JButton;
@@ -321,7 +322,15 @@ public class UserPage extends JFrame
 									stmt2.setString(4, AddressField.getText());
 									stmt2.setString(5, PhoneField.getText());
 									stmt2.setString(6, libraryCard);
-									stmt2.execute();
+									if(Validator.checkName(FirstField.getText()) && Validator.checkName(LastField.getText())
+											&& Validator.checkEmailUpdate(EmailField.getText())
+											&& Validator.checkPhone(PhoneField.getText()))
+									{
+										stmt2.execute();
+										JOptionPane.showMessageDialog(null, "Update made successfully.");
+									} else {
+										JOptionPane.showMessageDialog(null, "Please try again.");
+									}
 									
 									String query3 = "select * from Login where LibraryCard=? ";
 									PreparedStatement stmt3 = conn.prepareStatement(query3);
@@ -336,7 +345,6 @@ public class UserPage extends JFrame
 										AddressField.setText(rs3.getString(7));
 										EmailField.setText(rs3.getString(6));
 									}
-									
 									stmt.close();
 									stmt2.close();
 									stmt3.close();
