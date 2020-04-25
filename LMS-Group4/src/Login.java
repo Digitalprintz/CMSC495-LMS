@@ -5,6 +5,10 @@
    
    @author [Richard Arnold, Redi Delulo, Krista Burdick, Chris Hammond, Alyssa Knight and Matt Worman]
    @version $Revision: .6 $ $Date: 2020/25/04 14:38:25 $
+   
+   //TEST USER INFO:
+    * Library Card #: 123
+    * Password: TestPass
 
 **/
 

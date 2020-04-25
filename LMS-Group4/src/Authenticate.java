@@ -13,10 +13,13 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Authenticate {
+public class Authenticate 
+{
 	//Returns the hashed String
-	public static String encrypt(String p, String uid) {
-		try {
+	public static String encrypt(String p, String uid) 
+	{
+		try 
+		{
 			//Uses SHA-256 for security
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");
 			//Combines password and unique ID for added security.
@@ -26,7 +29,8 @@ public class Authenticate {
 			
 			//Converts the hashed password to a string for storage in SQLite
 			StringBuffer hexString = new StringBuffer();
-			for (int i = 0; i < hashedByte.length; i++) {
+			for (int i = 0; i < hashedByte.length; i++) 
+			{
 				String hex = Integer.toHexString(0xff & hashedByte[i]);
 			    if(hex.length() == 1) hexString.append('0');
 			        hexString.append(hex);
@@ -34,8 +38,10 @@ public class Authenticate {
 			//Returns the hashed password in string format.
 			return hexString.toString();		
 			
-		} catch (NoSuchAlgorithmException exception) {
-	            exception.printStackTrace();
+		} 
+		catch (NoSuchAlgorithmException exception) 
+		{
+			exception.printStackTrace();
 	    }
 		return "";
 	}
