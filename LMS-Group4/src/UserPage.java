@@ -86,8 +86,10 @@ public class UserPage extends JFrame {
 		contentPane.setLayout(null);
 
 		JButton exitBtn = new JButton("Logout");
-		exitBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		exitBtn.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				Login user = new Login();
 				user.frame.setVisible(true);
 				Logging.Log("4", "SUCCESSFUL_LOGOUT", "Logged out successfully with username: " + libraryCard);
@@ -114,8 +116,10 @@ public class UserPage extends JFrame {
 
 		// Performs the search based on what is inside the Search textfield
 		JButton SearchBtn = new JButton("Search");
-		SearchBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		SearchBtn.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				try {
 					// Queries and finds number of rows
 					String query = "select * from Media where MediaName like ? or ISBN like ? or Author like ? ";
@@ -126,7 +130,8 @@ public class UserPage extends JFrame {
 					ResultSet rs = stmt.executeQuery();
 
 					int rowCount = 0;
-					while (rs.next()) {
+					while (rs.next()) 
+					{
 						rowCount++;
 					}
 
@@ -153,7 +158,8 @@ public class UserPage extends JFrame {
 
 					// iterates through resultset and fills table
 					int count = 0;
-					while (rs2.next()) {
+					while (rs2.next()) 
+					{
 						table.setValueAt(rs2.getString(1), count, 0);
 						table.setValueAt(rs2.getString(2), count, 1);
 						table.setValueAt(rs2.getString(3), count, 2);
@@ -170,7 +176,9 @@ public class UserPage extends JFrame {
 					rs.close();
 					rs2.close();
 
-				} catch (Exception d) {
+				} 
+				catch (Exception d) 
+				{
 					d.printStackTrace();
 
 				}
@@ -183,8 +191,10 @@ public class UserPage extends JFrame {
 
 		// Handles going to the account info page.
 		JButton actInfoBtn = new JButton("Account Info");
-		actInfoBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		actInfoBtn.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				JLabel FirstLabel = new JLabel("First Name:");
 				FirstLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 				FirstLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -248,13 +258,15 @@ public class UserPage extends JFrame {
 				contentPane.add(LastField);
 
 				// Queries and retrieves account data, then updates the textfields
-				try {
+				try 
+				{
 					String query = "select * from Login where LibraryCard=? ";
 					PreparedStatement stmt = conn.prepareStatement(query);
 					stmt.setString(1, libraryCard);
 					ResultSet rs = stmt.executeQuery();
 
-					while (rs.next()) {
+					while (rs.next()) 
+					{
 						FirstField.setText(rs.getString(3));
 						LastField.setText(rs.getString(4));
 						PhoneField.setText(rs.getString(8));
@@ -265,22 +277,28 @@ public class UserPage extends JFrame {
 					stmt.close();
 					rs.close();
 
-				} catch (Exception f) {
+				} 
+				catch (Exception f) 
+				{
 					f.printStackTrace();
 
 				}
 
 				// Update button
 				JButton updateBtn = new JButton("Update");
-				updateBtn.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						try {
+				updateBtn.addActionListener(new ActionListener() 
+				{
+					public void actionPerformed(ActionEvent e) 
+					{
+						try 
+						{
 							String query = "select * from Login where LibraryCard=? ";
 							PreparedStatement stmt = conn.prepareStatement(query);
 							stmt.setString(1, libraryCard);
 							ResultSet rs = stmt.executeQuery();
 
-							while (rs.next()) {
+							while (rs.next()) 
+							{
 								uid = rs.getString(1);
 							}
 
@@ -294,7 +312,8 @@ public class UserPage extends JFrame {
 							stmt2.setString(5, PhoneField.getText());
 							stmt2.setString(6, libraryCard);
 
-							if (!(EmailField.getText().equalsIgnoreCase(currentEmail))) {
+							if (!(EmailField.getText().equalsIgnoreCase(currentEmail))) 
+							{
 								emailChanged = true;
 							}
 
@@ -324,7 +343,9 @@ public class UserPage extends JFrame {
 							stmt3.close();
 							rs.close();
 							rs3.close();
-						} catch (Exception f) {
+						} 
+						catch (Exception f) 
+						{
 							f.printStackTrace();
 
 						}
@@ -337,8 +358,14 @@ public class UserPage extends JFrame {
 
 				// Change password button
 				JButton ChngPass = new JButton("Change Password");
-				ChngPass.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
+				ChngPass.addActionListener(new ActionListener() 
+				{
+					public void actionPerformed(ActionEvent e) 
+					{
+						UserChangePass user = new UserChangePass();
+						user.passCard(libraryCard);
+						user.setVisible(true);
+						dispose();
 					}
 				});
 				ChngPass.setFont(new Font("Tahoma", Font.PLAIN, 16));
