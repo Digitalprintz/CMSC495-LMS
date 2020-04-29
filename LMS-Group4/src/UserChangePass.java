@@ -145,8 +145,7 @@ public class UserChangePass extends JFrame {
 						stmt2.setString(1, Authenticate.encrypt(textField.getText(), libraryCard));
 						stmt2.setString(2, libraryCard);
 						stmt2.execute();
-						Logging.Log("5", "PASSWORD_CHANGED",
-								libraryCard + " changed their password.");
+						Logging.Log("5", "PASSWORD_CHANGED", libraryCard + " changed their password.");
 						stmt2.close();
 						conn.close();
 
@@ -161,7 +160,7 @@ public class UserChangePass extends JFrame {
 
 					}
 				} else {
-					if(!textField.getText().contentEquals(textField_1.getText())) {
+					if (!textField.getText().contentEquals(textField_1.getText())) {
 						JOptionPane.showMessageDialog(null, "Password does not match. Please try again.");
 					}
 				}
