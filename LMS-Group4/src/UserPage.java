@@ -338,6 +338,8 @@ public class UserPage extends JFrame {
 								AddressField.setText(rs3.getString(7));
 								EmailField.setText(rs3.getString(6));
 							}
+							currentEmail = EmailField.getText();
+							emailChanged = false;
 							stmt.close();
 							stmt2.close();
 							stmt3.close();
