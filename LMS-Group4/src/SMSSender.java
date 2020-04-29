@@ -10,9 +10,9 @@ public class SMSSender {
 		// TODO Auto-generated method stub
 		String message = m;		
 		String phone = n;
-		String username = "librecovery";
-		String password = "1az2sx3dc";
-		String address = "http://98.170.253.15";
+		String username = "";
+		String password = "";
+		String address = "";
 		String port = "8090";
 		
 		URL url = new URL(

@@ -105,7 +105,7 @@ public class Login {
 						user.passCard(userText.getText());
 						frame.setVisible(false);
 						user.setVisible(true);
-						SMSSender.SendRecovery("12315197542", userText.getText() + "Logged In.");
+
 						Logging.Log("1", "SUCCESSFUL_LOGIN", "Login successful with username: " + userText.getText());
 					} else {
 						JOptionPane.showMessageDialog(null, "Username or Password is incorrect, please try again.");
@@ -158,7 +158,7 @@ public class Login {
 		libLoginBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		libLoginBtn.setBounds(427, 331, 200, 50);
 		frame.getContentPane().add(libLoginBtn);
-		
+
 		JButton registerBtn_1 = new JButton("Forgot Password?");
 		registerBtn_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
