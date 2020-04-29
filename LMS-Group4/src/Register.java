@@ -140,8 +140,8 @@ public class Register extends JFrame {
 		String libCard = sb.toString();
 
 		libCardText = new JTextField();
-		libCardText.setText(libCard);
 		libCardText.setEditable(false);
+		libCardText.setText(libCard);
 		libCardText.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		libCardText.setBounds(151, 65, 475, 26);
 		contentPane.add(libCardText);
@@ -184,6 +184,7 @@ public class Register extends JFrame {
 		contentPane.add(phoneText);
 
 		JButton btnNewButton = new JButton("Register");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				/**

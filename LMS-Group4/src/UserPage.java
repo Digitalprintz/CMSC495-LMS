@@ -45,9 +45,12 @@ public class UserPage extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
 				try {
 					UserPage frame = new UserPage();
 					frame.setVisible(true);
@@ -58,7 +61,8 @@ public class UserPage extends JFrame {
 		});
 	}
 
-	public void passCard(String card) {
+	public void passCard(String card) 
+	{
 		libraryCard = card;
 		JLabel LibCard = new JLabel(libraryCard);
 		LibCard.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -74,7 +78,8 @@ public class UserPage extends JFrame {
 	 * Create the frame.
 	 * 
 	 */
-	public UserPage() {
+	public UserPage() 
+	{
 
 		conn = sqliteConnection.dbConnect();
 

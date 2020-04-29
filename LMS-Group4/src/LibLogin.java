@@ -118,27 +118,44 @@ public class LibLogin extends JFrame {
 		loginBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String query = "select * from LibLogin where Username=? and Password=? ";
-					PreparedStatement stmt = conn.prepareStatement(query);
-					stmt.setString(1, userText.getText());
-					stmt.setString(2, passText.getText());
-
-					ResultSet rs = stmt.executeQuery();
-					int count = 0;
-					while (rs.next()) {
-						count++;
-
+					//finds LibID to check password.
+					String query2 = "select * from LibLogin where Username=?";
+					PreparedStatement stmt2 = conn.prepareStatement(query2);
+					stmt2.setString(1, userText.getText());
+					ResultSet rs2 = stmt2.executeQuery();
+					while(rs2.next())
+					{
+						//actual verification of password and login.
+						String query = "select * from LibLogin where Username=? and Password=? ";
+						PreparedStatement stmt = conn.prepareStatement(query);
+						stmt.setString(1, userText.getText());
+						stmt.setString(2, Authenticate.encrypt(passText.getText(), rs2.getString(4)));
+	
+						ResultSet rs = stmt.executeQuery();
+						int count = 0;
+						while (rs.next()) {
+							count++;
+	
+						}
+						if (count == 1) {
+							LibFunc user2 = new LibFunc();
+							user2.setVisible(true);
+							
+							rs.close();
+							stmt.close();
+							rs2.close();
+							stmt2.close();
+							
+							dispose();
+						} else {
+							JOptionPane.showMessageDialog(null, "Username or Password is incorrect, please try again.");
+						}
+	
+						rs.close();
+						stmt.close();
 					}
-					if (count == 1) {
-						LibFunc user2 = new LibFunc();
-						user2.setVisible(true);
-						dispose();
-					} else {
-						JOptionPane.showMessageDialog(null, "Username or Password is incorrect, please try again.");
-					}
-
-					rs.close();
-					stmt.close();
+					stmt2.close();
+					rs2.close();
 
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1);

@@ -230,6 +230,20 @@ public class LibFunc extends JFrame {
 		btnModifyMedia.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnModifyMedia.setBounds(321, 51, 285, 30);
 		mainPanel.add(btnModifyMedia);
+		
+		JButton btnRegisterLibrarian = new JButton("Register Librarian");
+		btnRegisterLibrarian.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				LibFuncRegLib user = new LibFuncRegLib();
+				user.setVisible(true);
+				dispose();
+			}
+		});
+		btnRegisterLibrarian.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnRegisterLibrarian.setBounds(10, 260, 285, 30);
+		mainPanel.add(btnRegisterLibrarian);
 
 	}
 }

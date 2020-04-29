@@ -142,7 +142,7 @@ public class Login {
 			}
 		});
 		registerBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		registerBtn.setBounds(10, 331, 191, 50);
+		registerBtn.setBounds(10, 331, 200, 50);
 		frame.getContentPane().add(registerBtn);
 
 		// Handles switching to the librarian login page
@@ -155,7 +155,16 @@ public class Login {
 			}
 		});
 		libLoginBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		libLoginBtn.setBounds(436, 331, 191, 50);
+		libLoginBtn.setBounds(427, 331, 200, 50);
 		frame.getContentPane().add(libLoginBtn);
+		
+		JButton registerBtn_1 = new JButton("Forgot Password?");
+		registerBtn_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		registerBtn_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		registerBtn_1.setBounds(220, 331, 200, 50);
+		frame.getContentPane().add(registerBtn_1);
 	}
 }
