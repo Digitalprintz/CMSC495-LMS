@@ -1,3 +1,12 @@
+/**
+   [User password change page. Allows a user to change their password after verifying information.]
+   
+   [Notes]
+   
+   @author [Richard Arnold, Redi Delulo, Krista Burdick, Chris Hammond, Alyssa Knight and Matt Worman]
+   @version $Revision: .7 $ $Date: 2020/29/04 12:24:36 $
+
+**/
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -155,13 +164,14 @@ public class UserChangePass extends JFrame {
 						user.passCard(libraryCard);
 						user.setVisible(true);
 						dispose();
-					} catch (Exception f) {
+					} 
+					catch (Exception f) {
 						f.printStackTrace();
-
 					}
-				} else {
+				} 
+				else {
 					if (!textField.getText().contentEquals(textField_1.getText())) {
-						JOptionPane.showMessageDialog(null, "Password does not match. Please try again.");
+						JOptionPane.showMessageDialog(null, "Passwords do not match. Please try again.");
 					}
 				}
 			}

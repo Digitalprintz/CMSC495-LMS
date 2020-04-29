@@ -1,4 +1,13 @@
-import java.awt.BorderLayout;
+/**
+   [User forgot password page. Allows a user to change their password after verifying information.]
+   
+   [Notes]
+   
+   @author [Richard Arnold, Redi Delulo, Krista Burdick, Chris Hammond, Alyssa Knight and Matt Worman]
+   @version $Revision: .7 $ $Date: 2020/29/04 12:24:36 $
+
+**/
+
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -132,6 +141,7 @@ public class UserForgotPass extends JFrame
 					stmt.setString(2, textField_1.getText());
 
 					ResultSet rs = stmt.executeQuery();
+					int count = 0;
 					while (rs.next()) 
 					{
 						lblPassword.setVisible(true);
@@ -140,8 +150,16 @@ public class UserForgotPass extends JFrame
 						textField_3.setVisible(true);
 						btnChangePassword.setVisible(true);
 						lblPleaseEnterThe.setVisible(true);
-						
-
+						textField.setEditable(false);
+						count++;
+					}
+					if(count>0)
+					{
+						JOptionPane.showMessageDialog(null, "Verification successful.");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Verification failed. Please Try Again.");
 					}
 
 					rs.close();
@@ -187,6 +205,40 @@ public class UserForgotPass extends JFrame
 		textField_3.setVisible(false);
 		
 		btnChangePassword = new JButton("Update");
+		btnChangePassword.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				if (textField_2.getText().contentEquals(textField_3.getText()) && Validator.checkPassword(textField_2.getText())) {
+					try {
+						// updates the password
+						String query2 = "Update Login set Password=? where LibraryCard=?";
+						PreparedStatement stmt2 = conn.prepareStatement(query2);
+						stmt2.setString(1, Authenticate.encrypt(textField_2.getText(), textField.getText()));
+						stmt2.setString(2, textField.getText());
+						stmt2.execute();
+						Logging.Log("5", "PASSWORD_CHANGED", textField.getText() + " changed their password.");
+						stmt2.close();
+						conn.close();
+
+						// states password was updated, then redirects to UserPage.
+						JOptionPane.showMessageDialog(null, "Password has been changed. Redirecting.");
+						UserPage user = new UserPage();
+						user.passCard(textField.getText());
+						user.setVisible(true);
+						dispose();
+					} 
+					catch (Exception f) {
+						f.printStackTrace();
+					}
+				} 
+				else {
+					if (!textField_2.getText().contentEquals(textField_3.getText())) {
+						JOptionPane.showMessageDialog(null, "Password does not match. Please try again.");
+					}
+				}
+			}
+		});
 		btnChangePassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnChangePassword.setBackground(Color.GREEN);
 		btnChangePassword.setBounds(454, 249, 152, 40);

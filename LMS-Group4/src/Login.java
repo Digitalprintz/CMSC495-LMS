@@ -5,7 +5,7 @@
    [Notes]
    
    @author [Richard Arnold, Redi Delulo, Krista Burdick, Chris Hammond, Alyssa Knight and Matt Worman]
-   @version $Revision: .6 $ $Date: 2020/25/04 14:38:25 $
+   @version $Revision: .7 $ $Date: 2020/29/04 12:24:36 $
    
    //TEST USER INFO:
     * Library Card #: 123
@@ -161,7 +161,11 @@ public class Login {
 
 		JButton registerBtn_1 = new JButton("Forgot Password?");
 		registerBtn_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) 
+			{
+				UserForgotPass user = new UserForgotPass();
+				user.setVisible(true);
+				frame.setVisible(false);
 			}
 		});
 		registerBtn_1.setFont(new Font("Tahoma", Font.PLAIN, 18));

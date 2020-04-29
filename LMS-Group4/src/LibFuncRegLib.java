@@ -1,5 +1,12 @@
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+/**
+   [Librarian Functionality for registering new librarians.]
+   
+   [Notes]
+   
+   @author [Richard Arnold, Redi Delulo, Krista Burdick, Chris Hammond, Alyssa Knight and Matt Worman]
+   @version $Revision: .7 $ $Date: 2020/29/04 12:24:36 $
+
+**/import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

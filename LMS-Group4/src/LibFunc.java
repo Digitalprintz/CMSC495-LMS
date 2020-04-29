@@ -1,11 +1,10 @@
-
 /**
    [Initial page draws the GUI and connects to the SQLite Database]
    
    [Notes]
    
    @author [Richard Arnold, Redi Delulo, Krista Burdick, Chris Hammond, Alyssa Knight and Matt Worman]
-   @version $Revision: .6 $ $Date: 2020/25/04 14:38:25 $
+   @version $Revision: .7 $ $Date: 2020/29/04 12:24:36 $
 
 **/
 
