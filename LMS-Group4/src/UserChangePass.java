@@ -172,6 +172,7 @@ public class UserChangePass extends JFrame {
 				else {
 					if (!textField.getText().contentEquals(textField_1.getText())) {
 						JOptionPane.showMessageDialog(null, "Passwords do not match. Please try again.");
+						Logging.Log("12", "ATTEMPTED_PASSWORD_CHANGE", libraryCard + " attempted to change their password.");
 					}
 				}
 			}

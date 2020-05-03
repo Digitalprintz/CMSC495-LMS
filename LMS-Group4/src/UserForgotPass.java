@@ -235,6 +235,7 @@ public class UserForgotPass extends JFrame
 				else {
 					if (!textField_2.getText().contentEquals(textField_3.getText())) {
 						JOptionPane.showMessageDialog(null, "Password does not match. Please try again.");
+						Logging.Log("12", "ATTEMPTED_PASSWORD_CHANGE", textField.getText() + " attempted to change their password.");
 					}
 				}
 			}

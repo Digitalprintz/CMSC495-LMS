@@ -243,9 +243,10 @@ public class LibFuncRemoveUser extends JFrame {
 						if (count6 == 1) {
 							JOptionPane.showMessageDialog(null,
 									"Removal unsuccessful, please verify Library Card and try again.");
+							Logging.Log("11", "REMOVAL_ATTEMPT", "Attempted deletion of User: " + removeTextField.getText());
 						} else {
 							JOptionPane.showMessageDialog(null, "Removal Successful.");
-							Logging.Log("5", "REMOVE_USER", "Deletion of User: " + removeTextField.getText());
+							Logging.Log("10", "REMOVE_USER", "Deletion of User: " + removeTextField.getText());
 						}
 
 						// closes everything out
