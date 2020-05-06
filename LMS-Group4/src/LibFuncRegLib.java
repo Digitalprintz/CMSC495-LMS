@@ -4,7 +4,7 @@
    [Notes]
    
    @author [Richard Arnold, Redi Delulo, Krista Burdick, Chris Hammond, Alyssa Knight and Matt Worman]
-   @version $Revision: .7 $ $Date: 2020/29/04 12:24:36 $
+   @version $Revision: .8 $ $Date: 05/06/2020 17:13:53 $
 
 **/import java.awt.EventQueue;
 import java.awt.Font;
@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -146,25 +147,45 @@ public class LibFuncRegLib extends JFrame
 					
 					// Sqlite Connection
 					conn = sqliteConnection.dbConnect();
-					String query = "insert into LibLogin (Username, Password, LibID) values (?,?,?)";
-					PreparedStatement stmt = conn.prepareStatement(query);
-					stmt.setString(1, userText.getText());
-					stmt.setString(2, Authenticate.encrypt(passText.getText(), libCard));
-					stmt.setString(3, libCard);
-
-					stmt.executeUpdate();
-					JOptionPane.showMessageDialog(null, "Registration Success.");
-
-					stmt.close();
 					
+					//Verifies username doesn't exist already
+					String query2 = "select * from LibLogin where Username like ? ";
+					PreparedStatement stmt2 = conn.prepareStatement(query2);
+					stmt2.setString(1, userText.getText());
+					ResultSet rs = stmt2.executeQuery();
+					int count = 0;
+					while(rs.next())
+					{
+						count++;
+					}
 					
-
-					Logging.Log("9", "ACCOUNT_CREATED", "Librarian Account created: " + userText.getText());
-
-					LibFunc user = new LibFunc();
-					user.setVisible(true);
-					conn.close();
-					dispose();
+					if(count == 1)
+					{
+						JOptionPane.showMessageDialog(null, "Username already exists. Please try again.");
+					}
+					else
+					{
+						String query = "insert into LibLogin (Username, Password, LibID) values (?,?,?)";
+						PreparedStatement stmt = conn.prepareStatement(query);
+						stmt.setString(1, userText.getText());
+						stmt.setString(2, Authenticate.encrypt(passText.getText(), libCard));
+						stmt.setString(3, libCard);
+	
+						stmt.executeUpdate();
+						JOptionPane.showMessageDialog(null, "Registration Success.");
+	
+						stmt.close();
+						stmt2.close();
+						rs.close();
+						
+	
+						Logging.Log("9", "ACCOUNT_CREATED", "Librarian Account created: " + userText.getText());
+	
+						LibFunc user = new LibFunc();
+						user.setVisible(true);
+						conn.close();
+						dispose();
+					}
 				} 
 				catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1);

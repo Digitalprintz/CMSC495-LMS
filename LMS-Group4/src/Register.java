@@ -4,7 +4,7 @@
    [Notes]
    
    @author [Richard Arnold, Redi Delulo, Krista Burdick, Chris Hammond, Alyssa Knight and Matt Worman]
-   @version $Revision: .7 $ $Date: 2020/29/04 12:24:36 $
+   @version $Revision: .8 $ $Date: 05/06/2020 17:13:53 $
 
 **/
 
@@ -186,16 +186,8 @@ public class Register extends JFrame {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/**
-				 * //checks to make sure all text fields are not null and are greater then 2 in
-				 * length. if((firstNameText.getText() != null &&
-				 * firstNameText.getText().length() > 2) && (lastNameText.getText() != null &&
-				 * lastNameText.getText().length() > 2) && (passText.getText() != null &&
-				 * passText.getText().length() > 2) && (emailText.getText() != null &&
-				 * emailText.getText().length() > 2) && (addressText.getText() != null &&
-				 * addressText.getText().length() > 2) && (phoneText.getText() != null &&
-				 * phoneText.getText().length() > 2))
-				 */
+				
+				//checks to make sure all text fields are not null and are greater then 2 in
 				if (Validator.checkName(firstNameText.getText()) && Validator.checkName(lastNameText.getText())
 						&& Validator.checkPassword(passText.getText()) && Validator.checkEmail(emailText.getText())
 						&& Validator.checkPhone(phoneText.getText())) {

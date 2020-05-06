@@ -4,7 +4,7 @@
    [Notes]
    
    @author [Richard Arnold, Redi Delulo, Krista Burdick, Chris Hammond, Alyssa Knight and Matt Worman]
-   @version $Revision: .7 $ $Date: 2020/29/04 12:24:36 $
+   @version $Revision: .8 $ $Date: 05/06/2020 17:13:53 $
 
 **/
 
@@ -37,7 +37,6 @@ public class UserPage extends JFrame {
 	private JTextField PhoneField;
 	private JTextField AddressField;
 	private JTextField EmailField;
-	private String uid;
 
 	private String currentEmail = "";
 	private boolean emailChanged = false;
@@ -127,11 +126,12 @@ public class UserPage extends JFrame {
 			{
 				try {
 					// Queries and finds number of rows
-					String query = "select * from Media where MediaName like ? or ISBN like ? or Author like ? ";
+					String query = "select * from Media where MediaName like ? or ISBN like ? or Author like ? and not CheckedOut like ? ";
 					PreparedStatement stmt = conn.prepareStatement(query);
 					stmt.setString(1, "%" + searchText.getText() + "%");
 					stmt.setString(2, "%" + searchText.getText() + "%");
 					stmt.setString(3, "%" + searchText.getText() + "%");
+					stmt.setString(4, "Lost");
 					ResultSet rs = stmt.executeQuery();
 
 					int rowCount = 0;
@@ -141,11 +141,12 @@ public class UserPage extends JFrame {
 					}
 
 					// Actual search query
-					String query2 = "select * from Media where MediaName like ? or ISBN like ? or Author like ? ";
+					String query2 = "select * from Media where MediaName like ? or ISBN like ? or Author like ? and not CheckedOut like ? ";
 					PreparedStatement stmt2 = conn.prepareStatement(query2);
 					stmt2.setString(1, "%" + searchText.getText() + "%");
 					stmt2.setString(2, "%" + searchText.getText() + "%");
 					stmt2.setString(3, "%" + searchText.getText() + "%");
+					stmt2.setString(4, "Lost");
 					ResultSet rs2 = stmt2.executeQuery();
 
 					// Adds table to scrollpane
@@ -297,16 +298,6 @@ public class UserPage extends JFrame {
 					{
 						try 
 						{
-							String query = "select * from Login where LibraryCard=? ";
-							PreparedStatement stmt = conn.prepareStatement(query);
-							stmt.setString(1, libraryCard);
-							ResultSet rs = stmt.executeQuery();
-
-							while (rs.next()) 
-							{
-								uid = rs.getString(1);
-							}
-
 							String query2 = "Update Login set FirstName=?,LastName=?,EmailAddress=?,Address=?,PhoneNumber=? where LibraryCard=?";
 
 							PreparedStatement stmt2 = conn.prepareStatement(query2);
@@ -334,7 +325,7 @@ public class UserPage extends JFrame {
 							String query3 = "select * from Login where LibraryCard=? ";
 							PreparedStatement stmt3 = conn.prepareStatement(query3);
 							stmt3.setString(1, libraryCard);
-							ResultSet rs3 = stmt.executeQuery();
+							ResultSet rs3 = stmt3.executeQuery();
 
 							while (rs3.next()) {
 								FirstField.setText(rs3.getString(3));
@@ -345,10 +336,8 @@ public class UserPage extends JFrame {
 							}
 							currentEmail = EmailField.getText();
 							emailChanged = false;
-							stmt.close();
 							stmt2.close();
 							stmt3.close();
-							rs.close();
 							rs3.close();
 						} 
 						catch (Exception f) 

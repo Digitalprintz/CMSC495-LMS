@@ -5,7 +5,7 @@
    [Notes]
    
    @author [Richard Arnold, Redi Delulo, Krista Burdick, Chris Hammond, Alyssa Knight and Matt Worman]
-   @version $Revision: .7 $ $Date: 2020/29/04 12:24:36 $
+   @version $Revision: .8 $ $Date: 05/06/2020 17:13:53 $
    
    //TEST USER INFO:
     * Library Card #: 123
@@ -87,6 +87,10 @@ public class Login {
 		// Should verify whether user exists, print an invalid username/password if user
 		// doesn't exist, and then go to the user page.
 		loginBtn.addActionListener(new ActionListener() {
+			
+			//Suppressing the deprecated warning for .getText() on a JPasswordField, as keeping password in memory for a short period 
+			//before disposal is not a major issue for a closed system and network program.
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String query = "select * from Login where LibraryCard=? and Password=? ";

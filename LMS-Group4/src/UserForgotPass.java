@@ -4,7 +4,7 @@
    [Notes]
    
    @author [Richard Arnold, Redi Delulo, Krista Burdick, Chris Hammond, Alyssa Knight and Matt Worman]
-   @version $Revision: .7 $ $Date: 2020/29/04 12:24:36 $
+   @version $Revision: .8 $ $Date: 05/06/2020 17:13:53 $
 
 **/
 
@@ -135,7 +135,7 @@ public class UserForgotPass extends JFrame
 			public void actionPerformed(ActionEvent e) 
 			{
 				try {
-					String query = "select * from Login where LibraryCard=? and EmailAddress=? ";
+					String query = "select * from Login where LibraryCard=? and EmailAddress like ? ";
 					PreparedStatement stmt = conn.prepareStatement(query);
 					stmt.setString(1, textField.getText());
 					stmt.setString(2, textField_1.getText());
@@ -209,33 +209,36 @@ public class UserForgotPass extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				if (textField_2.getText().contentEquals(textField_3.getText()) && Validator.checkPassword(textField_2.getText())) {
-					try {
-						// updates the password
-						String query2 = "Update Login set Password=? where LibraryCard=?";
-						PreparedStatement stmt2 = conn.prepareStatement(query2);
-						stmt2.setString(1, Authenticate.encrypt(textField_2.getText(), textField.getText()));
-						stmt2.setString(2, textField.getText());
-						stmt2.execute();
-						Logging.Log("5", "PASSWORD_CHANGED", textField.getText() + " changed their password.");
-						stmt2.close();
-						conn.close();
-
-						// states password was updated, then redirects to UserPage.
-						JOptionPane.showMessageDialog(null, "Password has been changed. Redirecting.");
-						UserPage user = new UserPage();
-						user.passCard(textField.getText());
-						user.setVisible(true);
-						dispose();
+				if(Validator.checkPassword(textField_2.getText()))
+				{
+					if (textField_2.getText().contentEquals(textField_3.getText())) {
+						try {
+							// updates the password
+							String query2 = "Update Login set Password=? where LibraryCard=?";
+							PreparedStatement stmt2 = conn.prepareStatement(query2);
+							stmt2.setString(1, Authenticate.encrypt(textField_2.getText(), textField.getText()));
+							stmt2.setString(2, textField.getText());
+							stmt2.execute();
+							Logging.Log("5", "PASSWORD_CHANGED", textField.getText() + " changed their password.");
+							stmt2.close();
+							conn.close();
+	
+							// states password was updated, then redirects to UserPage.
+							JOptionPane.showMessageDialog(null, "Password has been changed. Redirecting.");
+							UserPage user = new UserPage();
+							user.passCard(textField.getText());
+							user.setVisible(true);
+							dispose();
+						} 
+						catch (Exception f) {
+							f.printStackTrace();
+						}
 					} 
-					catch (Exception f) {
-						f.printStackTrace();
-					}
-				} 
-				else {
-					if (!textField_2.getText().contentEquals(textField_3.getText())) {
-						JOptionPane.showMessageDialog(null, "Password does not match. Please try again.");
-						Logging.Log("12", "ATTEMPTED_PASSWORD_CHANGE", textField.getText() + " attempted to change their password.");
+					else {
+						if (!textField_2.getText().contentEquals(textField_3.getText())) {
+							JOptionPane.showMessageDialog(null, "Password does not match. Please try again.");
+							Logging.Log("12", "ATTEMPTED_PASSWORD_CHANGE", textField.getText() + " attempted to change their password.");
+						}
 					}
 				}
 			}

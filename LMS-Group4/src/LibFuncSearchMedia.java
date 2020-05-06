@@ -4,7 +4,7 @@
    [Notes]
    
    @author [Richard Arnold, Redi Delulo, Krista Burdick, Chris Hammond, Alyssa Knight and Matt Worman]
-   @version $Revision: .7 $ $Date: 2020/29/04 12:24:36 $
+   @version $Revision: .8 $ $Date: 05/06/2020 17:13:53 $
 
 **/
 
@@ -444,6 +444,11 @@ public class LibFuncSearchMedia extends JFrame {
 					stmt2.close();
 					stmt3.close();
 					rs3.close();
+					
+					JOptionPane.showMessageDialog(null, "Media Updated. Redirecting...");
+					LibFuncSearchMedia user = new LibFuncSearchMedia();
+					user.setVisible(true);
+					dispose();
 
 				} catch (SQLException e1) {
 					e1.printStackTrace();
