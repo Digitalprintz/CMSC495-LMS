@@ -40,6 +40,7 @@ public class UserPage extends JFrame {
 
 	private String currentEmail = "";
 	private boolean emailChanged = false;
+	private String checkedOut;
 
 	/**
 	 * Launch the application.
@@ -72,6 +73,7 @@ public class UserPage extends JFrame {
 
 	Connection conn = null;
 	private JTable table;
+	private JTextField textField;
 
 	/**
 	 * Create the frame.
@@ -110,12 +112,73 @@ public class UserPage extends JFrame {
 		contentPane.add(LibCardLabel);
 
 		searchText = new JTextField();
+		searchText.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		searchText.setBounds(10, 78, 473, 35);
 		contentPane.add(searchText);
 		searchText.setColumns(10);
+		
+		JButton btnCheckout = new JButton("Checkout");
+		btnCheckout.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				//checks whether media ID exists
+				try 
+				{
+					String query2 = "select * from Media where MID=?";
+					PreparedStatement stmt2 = conn.prepareStatement(query2);
+					stmt2.setString(1, textField.getText());
+					ResultSet rs2 = stmt2.executeQuery();
+					int count = 0;
+					while(rs2.next())
+					{
+						count++;
+						checkedOut = rs2.getString(7);
+					}
+					if(count>0 && checkedOut.equals("No"))
+					{
+						//Updates to check out to user
+						String query3 = "Update Media set CheckedOut=?,CheckedBy=? where MID=?";
+
+						PreparedStatement stmt3 = conn.prepareStatement(query3);
+						stmt3.setString(1, "Yes");
+						stmt3.setString(2, libraryCard);
+						stmt3.setString(3, textField.getText());
+
+						stmt3.execute();
+						
+						JOptionPane.showMessageDialog(null, "Media has been checked out.");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Invalid MediaID or Item is already checked out. Please try again.");
+					}
+				}
+				catch(Exception s)
+				{
+					s.printStackTrace();
+				}
+				
+			}
+		});
+		btnCheckout.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnCheckout.setBounds(500, 347, 126, 35);
+		contentPane.add(btnCheckout);
+		
+		textField = new JTextField();
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textField.setColumns(10);
+		textField.setBounds(94, 347, 389, 35);
+		contentPane.add(textField);
+		
+		JLabel lblMediaId = new JLabel("Media ID:");
+		lblMediaId.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblMediaId.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblMediaId.setBounds(10, 347, 74, 35);
+		contentPane.add(lblMediaId);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 124, 616, 258);
+		scrollPane.setBounds(10, 124, 616, 218);
 		contentPane.add(scrollPane);
 
 		// Performs the search based on what is inside the Search textfield
@@ -371,6 +434,9 @@ public class UserPage extends JFrame {
 				SearchBtn.setVisible(false);
 				scrollPane.setVisible(false);
 				searchText.setVisible(false);
+				textField.setVisible(false);
+				btnCheckout.setVisible(false);
+				lblMediaId.setVisible(false);
 				actInfoBtn.setVisible(false);
 
 				JButton SearchPane = new JButton("Search");
@@ -392,6 +458,10 @@ public class UserPage extends JFrame {
 						lblEmail.setVisible(false);
 						lblAddress.setVisible(false);
 						lblPhoneNumber.setVisible(false);
+						ChngPass.setVisible(false);
+						textField.setVisible(true);
+						btnCheckout.setVisible(true);
+						lblMediaId.setVisible(true);
 					}
 				});
 				SearchPane.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -403,6 +473,10 @@ public class UserPage extends JFrame {
 		actInfoBtn.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		actInfoBtn.setBounds(362, 11, 137, 40);
 		contentPane.add(actInfoBtn);
+		
+		
+		
+		
 
 	}
 }
