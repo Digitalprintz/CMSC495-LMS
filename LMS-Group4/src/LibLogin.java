@@ -126,8 +126,12 @@ public class LibLogin extends JFrame {
 					PreparedStatement stmt2 = conn.prepareStatement(query2);
 					stmt2.setString(1, userText.getText());
 					ResultSet rs2 = stmt2.executeQuery();
+					
+					//count2 verifies that the username actually exists and puts an error message if it doesn't.
+					int count2 = 0;
 					while(rs2.next())
 					{
+						count2++;
 						//actual verification of password and login.
 						String query = "select * from LibLogin where Username=? and Password=? ";
 						PreparedStatement stmt = conn.prepareStatement(query);
@@ -159,6 +163,10 @@ public class LibLogin extends JFrame {
 					}
 					stmt2.close();
 					rs2.close();
+					if(count2 < 1)
+					{
+						JOptionPane.showMessageDialog(null, "Username or Password is incorrect, please try again.");
+					}
 
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, e1);
