@@ -171,6 +171,7 @@ public class LibFuncSearchUser extends JFrame {
 							count++;
 						}
 
+						table.setEnabled(false);
 						count = 0;
 						rowCount = 0;
 						stmt.close();

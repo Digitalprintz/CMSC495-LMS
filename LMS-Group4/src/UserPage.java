@@ -221,6 +221,7 @@ public class UserPage extends JFrame {
 					table.getColumnModel().getColumn(3).setHeaderValue("Media Type");
 					table.getColumnModel().getColumn(4).setHeaderValue("Media Author");
 					table.getColumnModel().getColumn(5).setHeaderValue("Checked Out?");
+					
 					table.getTableHeader().resizeAndRepaint();
 
 					// iterates through resultset and fills table
@@ -235,7 +236,7 @@ public class UserPage extends JFrame {
 						table.setValueAt(rs2.getString(7), count, 5);
 						count++;
 					}
-
+					table.setEnabled(false);
 					count = 0;
 					rowCount = 0;
 					stmt.close();

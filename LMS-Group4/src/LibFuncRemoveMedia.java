@@ -183,6 +183,7 @@ public class LibFuncRemoveMedia extends JFrame {
 							count2++;
 						}
 
+						table2.setEnabled(false);
 						count2 = 0;
 						rowCount2 = 0;
 						stmt3.close();
