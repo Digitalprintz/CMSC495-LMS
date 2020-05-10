@@ -189,12 +189,11 @@ public class UserPage extends JFrame {
 			{
 				try {
 					// Queries and finds number of rows
-					String query = "select * from Media where MediaName like ? or ISBN like ? or Author like ? and not CheckedOut like ? ";
+					String query = "select * from Media where CheckedOut != 'Lost' and (MediaName like ? or ISBN like ? or Author like ?) ";
 					PreparedStatement stmt = conn.prepareStatement(query);
 					stmt.setString(1, "%" + searchText.getText() + "%");
 					stmt.setString(2, "%" + searchText.getText() + "%");
 					stmt.setString(3, "%" + searchText.getText() + "%");
-					stmt.setString(4, "Lost");
 					ResultSet rs = stmt.executeQuery();
 
 					int rowCount = 0;
@@ -204,12 +203,11 @@ public class UserPage extends JFrame {
 					}
 
 					// Actual search query
-					String query2 = "select * from Media where MediaName like ? or ISBN like ? or Author like ? and not CheckedOut like ? ";
+					String query2 = "select * from Media where CheckedOut != 'Lost' and (MediaName like ? or ISBN like ? or Author like ?) ";
 					PreparedStatement stmt2 = conn.prepareStatement(query2);
 					stmt2.setString(1, "%" + searchText.getText() + "%");
 					stmt2.setString(2, "%" + searchText.getText() + "%");
 					stmt2.setString(3, "%" + searchText.getText() + "%");
-					stmt2.setString(4, "Lost");
 					ResultSet rs2 = stmt2.executeQuery();
 
 					// Adds table to scrollpane

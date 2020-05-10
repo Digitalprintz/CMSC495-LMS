@@ -213,8 +213,7 @@ public class LibFuncAddUser extends JFrame {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// checks to make sure all text fields are not null and are greater then 2 in
-				// length.
+				// Validates all fields against validator requirements
 				if (Validator.checkName(firstNameText.getText()) && Validator.checkName(lastNameText.getText())
 						&& Validator.checkPassword(passText.getText()) && Validator.checkEmail(emailText.getText())
 						&& Validator.checkPhone(phoneText.getText())) {
@@ -253,7 +252,7 @@ public class LibFuncAddUser extends JFrame {
 								stmt.setString(1, libCardText.getText());
 								stmt.setString(2, firstNameText.getText());
 								stmt.setString(3, lastNameText.getText());
-								stmt.setString(4, passText.getText());
+								stmt.setString(4, Authenticate.encrypt(passText.getText(), libCardText.getText()));
 								stmt.setString(5, emailText.getText());
 								stmt.setString(6, addressText.getText());
 								stmt.setString(7, phoneText.getText());
